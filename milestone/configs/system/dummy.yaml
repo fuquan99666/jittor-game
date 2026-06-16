@@ -1,0 +1,3 @@
+__target__: dummy
+ckpt_save_dir: experiments
+ckpt_save_name: checkpoint

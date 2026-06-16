@@ -1,0 +1,15 @@
+mode: predict
+debug: false
+load_ckpt: experiments/vm/checkpoint_99.pt
+
+components:
+  data: predict
+  transform: vm
+  system: vm
+  model: vm
+
+writer:
+  __target__: vm
+  save_dir: results
+  save_name: denoised
+  output_format: npy
