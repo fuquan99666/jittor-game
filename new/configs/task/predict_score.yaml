@@ -1,0 +1,16 @@
+mode: predict
+debug: false
+# ScoreModule 训练 100 轮后用最后一轮 checkpoint
+load_ckpt: experiments/score/checkpoint_99.pt
+
+components:
+  data: predict
+  transform: score
+  system: score
+  model: score
+
+writer:
+  __target__: vm
+  save_dir: results
+  save_name: denoised
+  output_format: npy

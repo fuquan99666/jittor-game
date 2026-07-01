@@ -1,0 +1,13 @@
+__target__: ScoreModule
+frame_knn: 16
+feat_embedding_dim: 256
+decoder_hidden_dim: 64
+
+# 推理: 退火 Langevin 的 sigma 序列(从大到小)和每级步数
+# sigma 应覆盖训练时的 [sigma_min, sigma_max] 范围
+predict_patch_size: 1000
+predict_seed_k: 6
+predict_seed_k_alpha: 1
+predict_sigmas: [0.020, 0.010, 0.007, 0.005]
+predict_steps_per_sigma: 5
+langevin_step_scale: 0.5

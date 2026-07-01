@@ -1,0 +1,43 @@
+# Score matching 专用 transform 链。
+# 与 vm.yaml 的区别: 用 score_perturb 替代 add_noise + patch,
+# 直接在 clean 点上加高斯噪声并计算得分目标(无需先加 Laplace 噪声)。
+#
+# predict_transform 仍必须为空(测试集已是 noisy.npy)。
+train_transform:
+  augments:
+    - __target__: sample
+      num_samples: 32768
+      num_vertex_samples: 1024
+
+    - __target__: normalize_pc
+
+    - __target__: linear
+      scale: [0.8, 1.2]
+      rotate_x_range: [-180, 180]
+      rotate_y_range: [-180, 180]
+      rotate_z_range: [-180, 180]
+      scale_p: 0.5
+      rotate_p: 0.5
+
+    - __target__: score_perturb
+      patch_size: 1000
+      num_patches: 1
+      sigma_min: 0.005
+      sigma_max: 0.020
+
+validate_transform:
+  augments:
+    - __target__: sample
+      num_samples: 32768
+      num_vertex_samples: 1024
+
+    - __target__: normalize_pc
+
+    - __target__: score_perturb
+      patch_size: 1000
+      num_patches: 1
+      sigma_min: 0.005
+      sigma_max: 0.020
+
+predict_transform:
+  augments: []

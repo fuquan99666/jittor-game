@@ -1,0 +1,18 @@
+mode: predict
+debug: false
+# checkpoint 文件名是 checkpoint_<epoch>.pt, 0-indexed。
+# trainer.epochs: 100 时最终是 checkpoint_99.pt。
+# 若改了 epochs, 这里也要同步改成新的最后一轮。
+load_ckpt: experiments/vm/checkpoint_99.pt
+
+components:
+  data: predict
+  transform: vm
+  system: vm
+  model: vm
+
+writer:
+  __target__: vm
+  save_dir: results
+  save_name: denoised
+  output_format: npy

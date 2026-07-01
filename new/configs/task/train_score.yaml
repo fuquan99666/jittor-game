@@ -1,0 +1,18 @@
+mode: train
+debug: false
+
+components:
+  data: train
+  transform: score
+  system: score
+  model: score
+
+loss:
+  loss: 1.0
+
+optimizer:
+  __target__: adam
+  lr: 0.0001
+
+trainer:
+  epochs: 100

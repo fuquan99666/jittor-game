@@ -1,0 +1,31 @@
+data_name: &data_name models/model_normalized.obj
+loader: &loader obj
+
+train_dataset:
+  shuffle: true
+  batch_size: 16
+  num_workers: 4            # 提升数据加载吞吐(原版为 0, IO 会拖慢训练)
+  datapath:
+    input_dataset_dir: ../dataset_train
+    use_prob: true          # 概率采样: 每 epoch 产出 num_files 个 batch, 而非遍历全集
+    num_files: 10000
+    loader: *loader
+    data_name: *data_name
+    ignore_check: true
+    data_path:
+      shapenet:
+        - [../milestone/datalist/train.txt, 1.0]
+
+validate_dataset:
+  shuffle: false
+  batch_size: 1
+  num_workers: 2
+  datapath:
+    input_dataset_dir: ../dataset_train
+    use_prob: false
+    loader: *loader
+    data_name: *data_name
+    ignore_check: true
+    data_path:
+      shapenet:
+        - [../milestone/datalist/validate.txt, 1.0]

@@ -1,0 +1,7 @@
+torch
+numpy
+trimesh
+scipy
+omegaconf
+tqdm
+point-cloud-utils
